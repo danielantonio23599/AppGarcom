@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/menu_perfil" />
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+        <item
+            android:id="@+id/nav_vendas"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_vendas" />
+        <item
+            android:id="@+id/nav_pedido"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_pedidos" />
+        <item
+            android:id="@+id/nav_cancelar"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_cancelar" />
+    </menu>
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+        <item
+            android:id="@+id/nav_cardapio"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_cardapio" />
+        <item
+            android:id="@+id/nav_produtos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_produtos" />
+        <item
+            android:id="@+id/nav_promocao"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_promocao" />
+    </menu>
+
+</menu>
