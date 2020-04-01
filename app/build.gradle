@@ -56,4 +56,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    //LIRARY PARA CORTE DE IMAGENS
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
+    //LIBRARY PARA IMAGEM CIRCULAR
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

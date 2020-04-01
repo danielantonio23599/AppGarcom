@@ -26,10 +26,6 @@ public class PreferencesSettings {
         PrefsUtils.setString(context, context.getString(R.string.SENHA), senha);
     }
 
-    public static void setUserisAdm(String fantazia, Context context){
-        PrefsUtils.setString(context, context.getString(R.string.FANTAZIA), fantazia);
-    }
-
     public static void  clearUser(String senha, Context context){
         PrefsUtils.setString(context, context.getString(R.string.SENHA), senha);
     }
@@ -43,22 +39,18 @@ public class PreferencesSettings {
     }
     */
 
-    public static void updateAllPreferences(Context context, SharedPreferencesEmpresa preferences) {
+    public static void updateAllPreferences(Context context, SharedPreferences preferences) {
 
-        PrefsUtils.setInteger(context, context.getString(R.string.CODIGO), preferences.getEmpCodigo());
-        PrefsUtils.setString(context, context.getString(R.string.EMAIL), preferences.getEmpEmail());
-        PrefsUtils.setString(context, context.getString(R.string.SENHA), preferences.getEmpSenha());
-        PrefsUtils.setString(context, context.getString(R.string.FANTAZIA), preferences.getEmpFantazia());
+        PrefsUtils.setInteger(context, context.getString(R.string.CODIGO), preferences.getCodigo());
+        PrefsUtils.setString(context, context.getString(R.string.EMAIL), preferences.getEmail());
+        PrefsUtils.setString(context, context.getString(R.string.SENHA), preferences.getSenha());
     }
 
-    public static SharedPreferencesEmpresa getAllPreferences(Context context) {
-        SharedPreferencesEmpresa u = new SharedPreferencesEmpresa();
-        u.setEmpCodigo(PrefsUtils.getInteger(context, context.getString(R.string.CODIGO)));
-        u.setEmpEmail(PrefsUtils.getString(context, context.getString(R.string.EMAIL)));
-        u.setEmpSenha(PrefsUtils.getString(context,  context.getString(R.string.SENHA)));
-        u.setEmpFantazia(PrefsUtils.getString(context, context.getString(R.string.FANTAZIA)));
-
-
+    public static SharedPreferences getAllPreferences(Context context) {
+        SharedPreferences u = new SharedPreferences();
+        u.setCodigo(PrefsUtils.getInteger(context, context.getString(R.string.CODIGO)));
+        u.setEmail(PrefsUtils.getString(context, context.getString(R.string.EMAIL)));
+        u.setSenha(PrefsUtils.getString(context,  context.getString(R.string.SENHA)));
         return u;
     }
 }

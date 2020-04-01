@@ -20,6 +20,7 @@
     <string name="menu_cancelar">Pedidos</string>
     <string name="menu_cardapio">Cardápio</string>
     <string name="menu_promocao">Promoções do Dia</string>
+    <string name="fragment_relatar_add_foto_text">Adicionar Foto</string>
 
     <string name="home_second">Home Second</string>
 </resources>

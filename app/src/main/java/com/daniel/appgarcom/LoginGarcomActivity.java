@@ -1,7 +1,10 @@
 package com.daniel.appgarcom;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.daniel.appgarcom.modelo.beans.Empresa;
+
+import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
 import com.daniel.appgarcom.modelo.beans.Servidor;
-import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
+import com.daniel.appgarcom.modelo.beans.SharedPreferences;
+
+import com.daniel.appgarcom.modelo.beans.Usuario;
 import com.daniel.appgarcom.modelo.persistencia.BdServidor;
+import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
 import com.daniel.appgarcom.util.TecladoUtil;
@@ -30,13 +37,14 @@ import retrofit2.Response;
  * Created by polo on 30/06/2018.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginGarcomActivity extends AppCompatActivity {
 
     private EditText userEmail, user_pwd;
     private Button buttonLogin;
     private ImageButton buttonConf;
     private AlertDialog alerta;
     private AlertDialog alerta2;
+    private TextView tvSign_up;
     EditText ip;
 
     @Override
@@ -44,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //settings.setUserLogOff(getBaseContext());
         //mostraDialog();
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_login_garcom);
         userEmail = (EditText) findViewById(R.id.input_email);
         user_pwd = (EditText) findViewById(R.id.input_senha);
         buttonLogin = (Button) findViewById(R.id.btnLogin);
         buttonConf = (ImageButton) findViewById(R.id.btnConf);
+        tvSign_up = (TextView) findViewById(R.id.tvSign_up);
         //todo validar todas as permissões de uma vez aqui
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +74,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showConfg();
+            }
+        });
+        tvSign_up.setOnClickListener(new View.OnClickListener() {
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                tvSign_up.setPaintFlags(tvSign_up.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                tvSign_up.setTextColor(Color.BLUE);
+                mudaActivity(CadastroActivity.class);
+
             }
         });
 
@@ -87,17 +106,23 @@ public class LoginActivity extends AppCompatActivity {
 
         RestauranteAPI api = SyncDefaut.RETROFIT_RESTAURANTE(getApplicationContext()).create(RestauranteAPI.class);
 
-        final Call<Empresa> call = api.fazLoginEmpresa(nomeUsuario, senha);
+        final Call<Usuario> call = api.fazLogin(nomeUsuario, senha);
 
-        call.enqueue(new Callback<Empresa>() {
+        call.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call<Empresa> call, Response<Empresa> response) {
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.code() == 200) {
                     String auth = response.headers().get("auth");
 
                     if (auth.equals("1")) {
-                        Empresa u = response.body();
-                        BdEmpresa bd = new BdEmpresa(getApplication());
+                        Usuario u = response.body();
+                        SharedPreferences s = new SharedPreferences();
+                        s.setCodigo(u.getCodigo());
+                        s.setEmail(u.getEmail());
+                        s.setSenha(u.getSenha());
+                        //Preference Settings ==============================================
+                        PreferencesSettings.updateAllPreferences(getBaseContext(), s);
+                        BdUsuario bd = new BdUsuario(getApplication());
                         bd.deleteAll();
                         bd.insert(u);
                         try {
@@ -106,10 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         escondeDialog();
-
-                        mudaActivity(LoginGarcomActivity.class);
-
-
+                        mudaActivity(PrincipalActivity.class);
                     } else {
                         escondeDialog();
                         Toast.makeText(getBaseContext(), "Nome de usuário ou senha incorretos", Toast.LENGTH_SHORT).show();
@@ -122,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Empresa> call, Throwable t) {
+            public void onFailure(Call<Usuario> call, Throwable t) {
                 escondeDialog();
                 Toast.makeText(getBaseContext(), "Erro ao fazer login, falhaaaaa", Toast.LENGTH_SHORT).show();
                 Log.i("[IFMG]", "faz login");
@@ -138,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
         View view = li.inflate(R.layout.alert_progress, null);
         TextView tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
         tvDesc.setText("Fazendo Login...");
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginGarcomActivity.this);
         builder.setTitle("Aguarde...");
         builder.setView(view);
         builder.setCancelable(false);

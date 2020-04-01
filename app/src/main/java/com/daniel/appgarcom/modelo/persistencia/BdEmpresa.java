@@ -5,17 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.daniel.appgarcom.modelo.beans.Empresa;
 import com.daniel.appgarcom.modelo.beans.Servidor;
 
-
-/**
- * Created by Daniel on 23/03/2018.
- */
-
-public class BdServidor {
+public class BdEmpresa {
     public SQLiteDatabase db, dbr;
 
-    public BdServidor(Context context) {
+    public BdEmpresa(Context context) {
 
         //objeto obrigatório para todas as classes
         BdCore auxBd = new BdCore(context);
@@ -26,14 +22,17 @@ public class BdServidor {
         dbr = auxBd.getReadableDatabase();
     }
 
-    public long insert(Servidor linha) {
+    public long insert(Empresa linha) {
 
         ContentValues values = new ContentValues();
-        if (linha.getCodigo() != 0)
-            values.put("serCodigo", linha.getCodigo());
-        values.put("serIp", linha.getIp());
+        if (linha.getEmpCodigo() != 0)
+            values.put("empCodigo", linha.getEmpCodigo());
+        values.put("empEmail", linha.getEmpEmail());
+        values.put("empSenha", linha.getEmpSenha());
+        values.put("empFantazia", linha.getEmpFantazia());
+        values.put("empLogo", linha.getEmpLogo());
         //inserindo diretamente na tabela sem a necessidade de script sql
-        long r = db.insert("servidor", null, values);
+        long r = db.insert("empresa", null, values);
         db.close();
         dbr.close();
         return r;
@@ -44,27 +43,31 @@ public class BdServidor {
     public void deleteAll() {
 
         // deleta todas informações da tabela usando script sql
-        db.execSQL("DELETE FROM acesslog;");
+        db.execSQL("DELETE FROM empresa;");
     }
 
 
-    public Servidor listar() {
-        Servidor linha = new Servidor();
-        linha.setCodigo(0);
+    public Empresa listar() {
+        Empresa linha = new Empresa();
+        linha.setEmpCodigo(0);
         // Query do banco
-        String query = "SELECT * FROM servidor ;";
+        String query = "SELECT * FROM empresa ;";
         // Cria o cursor e executa a query
         Cursor cursor = db.rawQuery(query, null);
         // Percorre os resultados
         // Se o cursor pode ir ao primeiro
         if (cursor.moveToFirst()) do {
             // Cria novo , cada vez que entrar aqui
-
             // Define os campos da configuracao, pegando do cursor pelo id da coluna
-            linha.setCodigo(cursor.getInt(0));
-            linha.setIp(cursor.getString(1));
+            linha.setEmpCodigo(cursor.getInt(0));
+            linha.setEmpEmail(cursor.getString(1));
+            linha.setEmpSenha(cursor.getString(2));
+            linha.setEmpFantazia(cursor.getString(3));
+            linha.setEmpLogo(cursor.getBlob(4));
         }
         while (cursor.moveToNext()); // Enquanto o usuario pode mover para o proximo ele executa esse metodo
+        db.close();
+        dbr.close();
         // Retorna a lista
         return linha;
     }
