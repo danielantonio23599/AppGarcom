@@ -1,69 +1,52 @@
-package com.daniel.appgarcom;
+package com.daniel.appgarcom.fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.daniel.appgarcom.adapter.AdapterProduto;
-import com.daniel.appgarcom.adapter.CustomItemClickListener;
-import com.daniel.appgarcom.adapter.holder.DialogHelper;
+import com.daniel.appgarcom.CadastroActivity;
+import com.daniel.appgarcom.R;
 import com.daniel.appgarcom.modelo.beans.Empresa;
 import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
-import com.daniel.appgarcom.modelo.beans.Produto;
 import com.daniel.appgarcom.modelo.beans.SharedPreferences;
 import com.daniel.appgarcom.modelo.beans.Usuario;
 import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
+import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
+import com.daniel.appgarcom.util.Criptografia;
+import com.daniel.appgarcom.util.Data;
+import com.daniel.appgarcom.util.MaskEditUtil;
 import com.daniel.appgarcom.util.PermissionUtils;
 import com.daniel.appgarcom.util.UtilImageTransmit;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by polo on 30/06/2018.
- */
-
-public class CadastroActivity extends AppCompatActivity {
-
-    private static final String TAG = "CadastroActivity";
-
+public class PerfilFragment extends Fragment {
+    private static final String TAG = "PerfilFragment";
     private static final String SELECT_PICTURE_TEXT_NO_PIC = "Selecionar foto";
     private static final String SELECT_PICTURE_TEXT_CHANGE_PIC = "Alterar foto";
     protected static final int RESULT_SPEECH = 1;
@@ -71,7 +54,7 @@ public class CadastroActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE_CODE = 1;
     private AlertDialog alerta;
     private AlertDialog alerta2;
-    private EditText nome, email, telefone,rg,cpf,pwd,logradouro,bairro,numero,uf,cidade,complemento,nascimento,cep;
+    private EditText nome, email, telefone, rg, cpf, pwd, logradouro, bairro, numero, uf, cidade, complemento, nascimento, cep;
     private Button buttonCadastro;
     private ImageButton map, view_pwd;
     private TextView tvDesc, tvAddImagem;
@@ -84,27 +67,29 @@ public class CadastroActivity extends AppCompatActivity {
     private boolean aux;
     private View view = null;
 
-    private static byte[] fotoUsuario ;
+    private static byte[] fotoUsuario;
     private TextView andres;
     private AutoCompleteTextView pesquisar;
     private ImageButton btnVoz;
     private ImageButton btnPesquisar;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
         String[] permissoes = new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.INTERNET,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
         };
-        PermissionUtils.validate(CadastroActivity.this, 0, permissoes);
-        imagemSignin = (ImageView) findViewById(R.id.imagem_signin);
+        PermissionUtils.validate(getActivity(), 0, permissoes);
+        imagemSignin = (ImageView) view.findViewById(R.id.imagem_signin);
 
-        addImagemBtn = (ImageButton) findViewById(R.id.add_image_button_signin);
+        addImagemBtn = (ImageButton) view.findViewById(R.id.add_image_button_signin);
 
-        tvAddImagem = (TextView) findViewById(R.id.add_image_text_signin);
+        tvAddImagem = (TextView) view.findViewById(R.id.add_image_text_signin);
 
         addImagemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,28 +98,28 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-        pwd = (EditText) findViewById(R.id.input_senha);
-        email = (EditText) findViewById(R.id.input_email);
-        nome = (EditText) findViewById(R.id.input_name);
-        nascimento = (EditText) findViewById(R.id.input_data_nascimento);
-        telefone = (EditText) findViewById(R.id.input_telefone);
-        cpf = (EditText) findViewById(R.id.input_cpf);
-        rg = (EditText) findViewById(R.id.input_rg);
-        logradouro = (EditText) findViewById(R.id.input_logradouro);
-        bairro = (EditText) findViewById(R.id.input_bairro);
-        numero = (EditText) findViewById(R.id.input_numero);
-        cidade = (EditText) findViewById(R.id.input_cidade);
-        complemento = (EditText) findViewById(R.id.input_complemento);
-        uf = (EditText) findViewById(R.id.input_uf);
-        cep = (EditText) findViewById(R.id.input_cep);
 
+        email = (EditText) view.findViewById(R.id.input_email);
+        nome = (EditText) view.findViewById(R.id.input_name);
+        pwd = (EditText) view.findViewById(R.id.input_senha);
+        nascimento = (EditText) view.findViewById(R.id.input_data_nascimento);
+        nascimento.addTextChangedListener(MaskEditUtil.mask(nascimento, MaskEditUtil.FORMAT_DATE));
+        telefone = (EditText) view.findViewById(R.id.input_telefone);
+        telefone.addTextChangedListener(MaskEditUtil.mask(telefone, MaskEditUtil.FORMAT_FONE));
+        cpf = (EditText) view.findViewById(R.id.input_cpf);
+        cpf.addTextChangedListener(MaskEditUtil.mask(cpf, MaskEditUtil.FORMAT_CPF));
+        rg = (EditText) view.findViewById(R.id.input_rg);
+        logradouro = (EditText) view.findViewById(R.id.input_logradouro);
+        bairro = (EditText) view.findViewById(R.id.input_bairro);
+        numero = (EditText) view.findViewById(R.id.input_numero);
+        cidade = (EditText) view.findViewById(R.id.input_cidade);
+        complemento = (EditText) view.findViewById(R.id.input_complemento);
+        uf = (EditText) view.findViewById(R.id.input_uf);
+        uf.addTextChangedListener(MaskEditUtil.mask(uf, "##"));
+        cep = (EditText) view.findViewById(R.id.input_cep);
+        cep.addTextChangedListener(MaskEditUtil.mask(cep, MaskEditUtil.FORMAT_CEP));
 
-        //view_pwd = (ImageButton) findViewById(R.id.input_password_view_button);
-
-
-
-
-        buttonCadastro = (Button) findViewById(R.id.buttonSignUp);
+        buttonCadastro = (Button) view.findViewById(R.id.buttonSignUp);
 
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,43 +127,45 @@ public class CadastroActivity extends AppCompatActivity {
 
                 if (validaCampos()) {
                     showAletProgress("Aguarde enquanto é cadastrado...");
-                    cadastrar2();
+                    cadastrar();
                 } else {
                     Log.d(TAG, "onClick: Campos Vazios");
-                    Toast.makeText(CadastroActivity.this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-
-
+        BdUsuario bdUsuario = new BdUsuario(getContext());
+        setDados(bdUsuario.listar());
+        bdUsuario.close();
+        return view;
     }
 
-    private void cadastrar2() {
-        u = new Usuario();
-
+    private void cadastrar() {
+        BdUsuario bdUsuario = new BdUsuario(getContext());
+        u = bdUsuario.listar();
+        bdUsuario.close();
+        u.setDataNacimento(Data.formataDataUS(nascimento.getText() + ""));
         u.setNome(nome.getText() + "");
-        u.setTelefone(telefone.getText()+"");
-        u.setEmail(email.getText()+"");
-        u.setSenha(pwd.getText()+"");
-        u.setCPF(cpf.getText()+"");
-        u.setRG(rg.getText()+"");
-        u.setLogradouro(logradouro.getText()+"");
-        u.setBairro(bairro.getText()+"");
-        u.setCidade(cidade.getText()+"");
-        u.setNumero(numero.getText()+"");
-        u.setUf(uf.getText()+"");
-        u.setCep(cep.getText()+"");
-        u.setComplemento(complemento.getText()+"");
-
+        u.setTelefone(telefone.getText() + "");
+        u.setEmail(email.getText() + "");
+        u.setSenha(Criptografia.criptografar(pwd.getText() + ""));
+        u.setCPF(cpf.getText() + "");
+        u.setRG(rg.getText() + "");
+        u.setLogradouro(logradouro.getText() + "");
+        u.setBairro(bairro.getText() + "");
+        u.setCidade(cidade.getText() + "");
+        u.setNumero(numero.getText() + "");
+        u.setUf(uf.getText() + "");
+        u.setCep(cep.getText() + "");
+        u.setComplemento(complemento.getText() + "");
         u.setFoto(fotoUsuario);
 
         Log.i("PASSOU", "Passou 1");
 
-        RestauranteAPI i = SyncDefaut.RETROFIT_RESTAURANTE(getApplication()).create(RestauranteAPI.class);
-        BdEmpresa bd = new BdEmpresa(getApplication());
-        Empresa e = bd.listar();
-        final Call<Void> call = i.insereFuncionario(new Gson().toJson(u),e.getEmpEmail(),e.getEmpSenha());
+        RestauranteAPI i = SyncDefaut.RETROFIT_RESTAURANTE(getContext()).create(RestauranteAPI.class);
+        SharedPreferences s = PreferencesSettings.getAllPreferences(getContext());
+        final Call<Void> call = i.atualizarFuncionario(new Gson().toJson(u), s.getEmail(), u.getSenha());
 
         Log.i("USUARIO", "U: " + u.toString());
 
@@ -186,42 +173,72 @@ public class CadastroActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-
                 if (response.code() == 200) {
 
-                    String nUsuExiste = response.headers().get("nUsuExiste");
-                    if (nUsuExiste.equals("1")) {
-                        Toast.makeText(CadastroActivity.this, "Este nome de usuário já existe", Toast.LENGTH_SHORT).show();
+                    String auth = response.headers().get("auth");
+                    if (auth.equals("1")) {
+                        BdUsuario bdUsuario = new BdUsuario(getContext());
+                        bdUsuario.deleteAll();
+                        u.setSenha(pwd.getText() + "");
+                        bdUsuario.insert(u);
+                        bdUsuario.close();
+                        Toast.makeText(getContext(), "Usuario Atualizado", Toast.LENGTH_SHORT).show();
                         alerta2.dismiss();
-                        Log.i("[IFMG]", "Usuario ja existe");
-                    } else if (nUsuExiste.equals("0")) {
-                        String auth = response.headers().get("sucesso");
-                        if (auth.equals("1")) {
-                            Toast.makeText(CadastroActivity.this, "Cadastro efetuado com Sucesso", Toast.LENGTH_SHORT).show();
-                            alerta2.dismiss();
 
-                            Log.i("[IFMG]", "Sucesso");
-                        } else {
-                            Toast.makeText(CadastroActivity.this, "Algo falhou", Toast.LENGTH_SHORT).show();
-                            alerta2.dismiss();
-                            Log.i("[IFMG]", "Falhou");
-                        }
+                    } else {
+                        Toast.makeText(getContext(), "Algo falhou", Toast.LENGTH_SHORT).show();
+                        alerta2.dismiss();
+                        Log.i("[IFMG]", "Falhou");
                     }
-                } else {
-                    Toast.makeText(CadastroActivity.this, "Algo falhou", Toast.LENGTH_SHORT).show();
-                    alerta2.dismiss();
+
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(CadastroActivity.this, "Falha ao cadastrar usuario..", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Falha ao cadastrar usuario..", Toast.LENGTH_SHORT).show();
                 alerta2.dismiss();
                 Log.i("[IFMG]", "Falha ao baixar usuários: " + t.getMessage());
                 t.printStackTrace();
             }
         });
 
+    }
+
+    private void setDados(Usuario u) {
+        nascimento.setText(Data.formataDataBR(u.getDataNacimento()));
+        nome.setText(u.getNome());
+        telefone.setText(u.getTelefone());
+        email.setText(u.getEmail());
+        pwd.setText(u.getSenha());
+        cpf.setText(u.getCPF());
+        rg.setText(u.getRG());
+        logradouro.setText(u.getLogradouro());
+        bairro.setText(u.getBairro());
+        cidade.setText(u.getCidade());
+        numero.setText(u.getNumero());
+        uf.setText(u.getUf());
+        cep.setText(u.getCep());
+        complemento.setText(u.getComplemento());
+        UtilImageTransmit utilImageTransmit = new UtilImageTransmit();
+        Bitmap bitmap = UtilImageTransmit.convertBytetoImage(u.getFoto());
+        if (bitmap != null) {
+            imagemSignin.setImageBitmap(bitmap);
+            imagemSignin.setBackgroundColor(Color.WHITE);
+            tvAddImagem.setText("Alterar imagem");
+            tvAddImagem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dispatchTakePictureIntent();
+                }
+            });
+            addImagemBtn.setVisibility(View.GONE);
+
+
+            fotoUsuario = utilImageTransmit.convertImageToByte(bitmap);
+
+            Log.i("FOTO", "" + fotoUsuario);
+        } else Log.i("imagem", "imagemNula");
     }
 
     private boolean validaCampos() {
@@ -239,7 +256,7 @@ public class CadastroActivity extends AppCompatActivity {
                 !uf.getText().toString().equals("") &&
                 !cep.getText().toString().equals("") &&
                 !complemento.getText().toString().equals("") &&
-                !fotoUsuario.equals("")) {
+                fotoUsuario != null) {
             return true;
         } else {
             return false;
@@ -253,7 +270,7 @@ public class CadastroActivity extends AppCompatActivity {
         View view = li.inflate(R.layout.alert_progress, null);
         tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
         tvDesc.setText(descricao);
-        AlertDialog.Builder builder = new AlertDialog.Builder(CadastroActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Aguarde...");
         builder.setView(view);
         builder.setCancelable(false);
@@ -263,10 +280,10 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE_CODE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE_CODE && resultCode == getActivity().RESULT_OK) {
 
             Bundle bundle = data.getExtras();
 
@@ -302,11 +319,10 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     private void dispatchTakePictureIntent() {
+        //galeria
+        //Intent.ACTION_GET_CONTENT
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE_CODE);
     }
-
-
 }
-

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppGarcom</string>
-    <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="title_activity_principal">Menu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -17,7 +17,7 @@
     <string name="menu_vendas">Vendas</string>
     <string name="menu_pedidos">Pedidos</string>
     <string name="menu_produtos">Produto</string>
-    <string name="menu_cancelar">Pedidos</string>
+    <string name="menu_cancelar">Cancelar</string>
     <string name="menu_cardapio">Cardápio</string>
     <string name="menu_promocao">Promoções do Dia</string>
     <string name="fragment_relatar_add_foto_text">Adicionar Foto</string>

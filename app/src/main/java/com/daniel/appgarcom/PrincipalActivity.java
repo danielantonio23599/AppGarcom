@@ -1,14 +1,23 @@
 package com.daniel.appgarcom;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.daniel.appgarcom.fragment.MesasFragment;
+import com.daniel.appgarcom.fragment.PerfilFragment;
+import com.daniel.appgarcom.modelo.beans.Usuario;
+import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
+import com.daniel.appgarcom.util.UtilImageTransmit;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -16,17 +25,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
-
-    private AppBarConfiguration mAppBarConfiguration;
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private ImageView perfil;
+    private TextView nome, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +40,45 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        View view = navigationView.inflateHeaderView(R.layout.nav_header_principal);
+        perfil = (ImageView) view.findViewById(R.id.imPerfil);
+        nome = (TextView) view.findViewById(R.id.tvUser);
+        email = (TextView) view.findViewById(R.id.tvEmail);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        // NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(this);
+        setDados();
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new PerfilFragment());
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                }
+            }
+        });
     }
+
+    private void setDados() {
+        BdUsuario bdUsuario = new BdUsuario(getApplicationContext());
+        Usuario u = bdUsuario.listar();
+        //fecha conexao
+        bdUsuario.close();
+        Bitmap bitmap = UtilImageTransmit.convertBytetoImage(u.getFoto());
+        if (bitmap != null) {
+            perfil.setImageBitmap(bitmap);
+        }
+        nome.setText(u.getNome());
+        email.setText(u.getEmail());
+
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -66,9 +97,30 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.principal, menu);
-        return true;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_item, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+
+        SearchView searchView = null;
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
@@ -76,11 +128,31 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_pedido) {
-        //    mudaActivity(PedidosActivity.class);
-            //replaceFragment(new PendentesFragment());
-      //  } else if (id == R.id.nav_realizado) {
-         //   replaceFragment(new MesasFragment());
+        if (id == R.id.nav_perfil) {
+            replaceFragment(new PerfilFragment());
+        } else if (id == R.id.nav_vendas) {
+            replaceFragment(new MesasFragment());
+            getSupportActionBar().setTitle("Mesas");
+
+
+        } else if (id == R.id.nav_pedido) {
+            // replaceFragment(new MesasFragment());
+
+
+        } else if (id == R.id.nav_cancelar) {
+            // replaceFragment(new MesasFragment());
+
+
+        } else if (id == R.id.nav_cardapio) {
+            // replaceFragment(new MesasFragment());
+
+
+        } else if (id == R.id.nav_produtos) {
+            // replaceFragment(new MesasFragment());
+
+
+        } else if (id == R.id.nav_promocao) {
+            // replaceFragment(new MesasFragment());
 
 
         }

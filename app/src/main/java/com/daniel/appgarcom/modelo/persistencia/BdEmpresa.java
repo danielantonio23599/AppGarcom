@@ -23,7 +23,6 @@ public class BdEmpresa {
     }
 
     public long insert(Empresa linha) {
-
         ContentValues values = new ContentValues();
         if (linha.getEmpCodigo() != 0)
             values.put("empCodigo", linha.getEmpCodigo());
@@ -33,10 +32,13 @@ public class BdEmpresa {
         values.put("empLogo", linha.getEmpLogo());
         //inserindo diretamente na tabela sem a necessidade de script sql
         long r = db.insert("empresa", null, values);
-        db.close();
-        dbr.close();
         return r;
 
+    }
+
+    public void close() {
+        db.close();
+        dbr.close();
     }
 
 
@@ -66,8 +68,6 @@ public class BdEmpresa {
             linha.setEmpLogo(cursor.getBlob(4));
         }
         while (cursor.moveToNext()); // Enquanto o usuario pode mover para o proximo ele executa esse metodo
-        db.close();
-        dbr.close();
         // Retorna a lista
         return linha;
     }

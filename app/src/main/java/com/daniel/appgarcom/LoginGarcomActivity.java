@@ -26,6 +26,7 @@ import com.daniel.appgarcom.modelo.persistencia.BdServidor;
 import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
+import com.daniel.appgarcom.util.Criptografia;
 import com.daniel.appgarcom.util.TecladoUtil;
 
 import retrofit2.Call;
@@ -100,13 +101,13 @@ public class LoginGarcomActivity extends AppCompatActivity {
     }
 
 
-    public void fazLogin(String nomeUsuario, String senha) {
+    public void fazLogin(String nomeUsuario, final String senha) {
         Log.i("[IFMG]", "faz login");
         mostraDialog();
 
         RestauranteAPI api = SyncDefaut.RETROFIT_RESTAURANTE(getApplicationContext()).create(RestauranteAPI.class);
 
-        final Call<Usuario> call = api.fazLogin(nomeUsuario, senha);
+        final Call<Usuario> call = api.fazLogin(nomeUsuario, Criptografia.criptografar(senha));
 
         call.enqueue(new Callback<Usuario>() {
             @Override
@@ -115,6 +116,7 @@ public class LoginGarcomActivity extends AppCompatActivity {
                     String auth = response.headers().get("auth");
 
                     if (auth.equals("1")) {
+                        Log.i("[IFMG]", response.body()+"");
                         Usuario u = response.body();
                         SharedPreferences s = new SharedPreferences();
                         s.setCodigo(u.getCodigo());
@@ -124,7 +126,10 @@ public class LoginGarcomActivity extends AppCompatActivity {
                         PreferencesSettings.updateAllPreferences(getBaseContext(), s);
                         BdUsuario bd = new BdUsuario(getApplication());
                         bd.deleteAll();
+                        u.setSenha(senha);
+                        Log.i("[IFMG]", u+"");
                         bd.insert(u);
+                        bd.close();
                         try {
                             Thread.sleep(300);
                         } catch (InterruptedException e) {

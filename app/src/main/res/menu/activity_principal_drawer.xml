@@ -2,42 +2,43 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <item
-        android:id="@+id/nav_perfil"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="@string/menu_perfil" />
-
-    <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_vendas"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_vendas" />
-        <item
-            android:id="@+id/nav_pedido"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_pedidos" />
-        <item
-            android:id="@+id/nav_cancelar"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_cancelar" />
-    </menu>
-
-    <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
-        <item
-            android:id="@+id/nav_cardapio"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_cardapio" />
-        <item
-            android:id="@+id/nav_produtos"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_produtos" />
-        <item
-            android:id="@+id/nav_promocao"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_promocao" />
-    </menu>
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/user"
+            android:title="@string/menu_perfil" />
+    </group>
+    <item android:title="Vendas">
+        <menu>
+            <item
+                android:id="@+id/nav_vendas"
+                android:icon="@drawable/order"
+                android:title="@string/menu_vendas" />
+            <item
+                android:id="@+id/nav_pedido"
+                android:icon="@drawable/shop"
+                android:title="@string/menu_pedidos" />
+            <item
+                android:id="@+id/nav_cancelar"
+                android:icon="@drawable/trash"
+                android:title="@string/menu_cancelar" />
+        </menu>
+    </item>
+    <item android:title="Cardapio">
+        <menu>
+            <item
+                android:id="@+id/nav_cardapio"
+                android:icon="@drawable/menu"
+                android:title="@string/menu_cardapio" />
+            <item
+                android:id="@+id/nav_produtos"
+                android:icon="@drawable/menu"
+                android:title="@string/menu_produtos" />
+            <item
+                android:id="@+id/nav_promocao"
+                android:icon="@drawable/tag"
+                android:title="@string/menu_promocao" />
+        </menu>
+    </item>
 
 </menu>

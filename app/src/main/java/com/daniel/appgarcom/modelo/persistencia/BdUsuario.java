@@ -44,8 +44,6 @@ public class BdUsuario {
 
         //inserindo diretamente na tabela sem a necessidade de script sql
         long r = db.insert("usuario", null, values);
-        db.close();
-        dbr.close();
         return r;
 
     }
@@ -54,8 +52,6 @@ public class BdUsuario {
     public void deleteAll() {
         // deleta todas informações da tabela usando script sql
         db.execSQL("DELETE FROM usuario;");
-        db.close();
-        dbr.close();
     }
 
 
@@ -73,27 +69,29 @@ public class BdUsuario {
 
             // Define os campos da configuracao, pegando do cursor pelo id da coluna
             linha.setCodigo(cursor.getInt(0));
-
             linha.setNome(cursor.getString(1));
             linha.setDataNacimento(cursor.getString(2));
             linha.setTelefone(cursor.getString(3));
             linha.setFoto(cursor.getBlob(4));
-            linha.setCPF(cursor.getString(5));
-            linha.setRG(cursor.getString(6));
-            linha.setSenha(cursor.getString(7));
-            linha.setLogradouro(cursor.getString(8));
-            linha.setBairro(cursor.getString(9));
-            linha.setComplemento(cursor.getString(10));
-            linha.setNumero(cursor.getString(11));
-            linha.setCidade(cursor.getString(12));
-            linha.setUf(cursor.getString(13));
-            linha.setCep(cursor.getString(14));
+            linha.setEmail(cursor.getString(5));
+            linha.setCPF(cursor.getString(6));
+            linha.setRG(cursor.getString(7));
+            linha.setSenha(cursor.getString(8));
+            linha.setLogradouro(cursor.getString(9));
+            linha.setBairro(cursor.getString(10));
+            linha.setComplemento(cursor.getString(11));
+            linha.setNumero(cursor.getString(12));
+            linha.setCidade(cursor.getString(13));
+            linha.setUf(cursor.getString(14));
+            linha.setCep(cursor.getString(15));
         }
         while (cursor.moveToNext()); // Enquanto o usuario pode mover para o proximo ele executa esse metodo
 
-        db.close();
-        dbr.close();
         // Retorna a lista
         return linha;
+    }
+    public void close() {
+        db.close();
+        dbr.close();
     }
 }

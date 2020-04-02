@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF">
+
+
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="670dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp">
+
+        <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_grey" />-->
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagem_signin"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/color_restaurante"
+            app:civ_circle_background_color="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageButton
+                android:id="@+id/add_image_button_signin"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_menu_camera"
+                android:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/add_image_text_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/fragment_relatar_add_foto_text"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_data_nascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <EditText
+                    android:id="@+id/input_data_nascimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Data de Nascimento"
+                    android:inputType="date"
+
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_telefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Telefone"
+                    android:inputType="phone"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- <ImageButton
+                 android:id="@+id/input_password_view_button"
+                 android:background="@android:color/transparent"
+                 android:tint="@android:color/darker_gray"
+                 android:src="@drawable/ic_pwd_eye"
+                 android:layout_gravity="center_vertical|end"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />-->
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_cpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CPF"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="RG"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_logradouro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_logradouro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Logradouro"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_bairro"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_bairro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Bairro"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_numero"
+                android:layout_width="79dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_numero"
+                    android:layout_width="79dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Número"
+                    android:inputType="textPostalAddress"
+
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_cidade"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_cidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cidade"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_uf"
+                android:layout_width="79dp"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/input_uf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="UF"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_complemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_complemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Complemento"
+                    android:inputType="textPostalAddress"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/input_cep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CEP"
+                    android:inputType="number"
+
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/input_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Senha"
+                    android:layout_marginBottom="70dp"
+                    android:inputType="textPassword"
+                    android:text=""
+                    android:textColorHint="@color/color_restaurante"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- <ImageButton
+                 android:id="@+id/input_password_view_button"
+                 android:background="@android:color/transparent"
+                 android:tint="@android:color/darker_gray"
+                 android:src="@drawable/ic_pwd_eye"
+                 android:layout_gravity="center_vertical|end"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />-->
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="60dp"
+        android:background="@color/color_restaurante"
+        android:padding="5dp"
+        android:text="SALVAR"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
+</ScrollView>
+
+
+    </FrameLayout>

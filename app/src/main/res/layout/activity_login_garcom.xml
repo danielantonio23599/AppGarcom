@@ -40,7 +40,7 @@
                 android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail da Empresa"
+                android:hint="E-mail do Garçom"
                 android:inputType="textEmailAddress"
                 android:text=""
                 android:textSize="14sp" />
