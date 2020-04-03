@@ -38,7 +38,7 @@ public interface RestauranteAPI {
     Call<ArrayList<Pedido>> listarPedidosRealizados(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
     @FormUrlEncoded
-    @POST("restaurante_server/ListarMesasAbertas")
+    @POST("restaurante_server/ListarMesaAberta")
     Call<ArrayList<Mesa>> getMesasAbertas(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
 
     @FormUrlEncoded
@@ -52,5 +52,10 @@ public interface RestauranteAPI {
     @FormUrlEncoded
     @POST("restaurante_server/ListarProdutos")
     Call<ArrayList<Produto>> listarProdutos(@Field("nomeUsuario") String nomeUsuario, @Field("senha") String senha);
+
+    @FormUrlEncoded
+    @POST("restaurante_server/AbrirMesa")
+    Call<Void> abrirMesa(@Field("nomeUsuario") String empresa, @Field("senha") String senha, @Field("mesa") String numMesa);
+
 
 }

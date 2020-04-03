@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.daniel.appgarcom.fragment.MesaFragment;
 import com.daniel.appgarcom.fragment.MesasFragment;
 import com.daniel.appgarcom.fragment.PerfilFragment;
 import com.daniel.appgarcom.modelo.beans.Usuario;
@@ -95,7 +96,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    @Override
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_item, menu);
@@ -114,14 +115,14 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // adapter.getFilter().filter(newText);
+                //adapter.getFilter().filter(newText);
                 return true;
             }
         });
 
         return super.onCreateOptionsMenu(menu);
 
-    }
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -131,7 +132,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         if (id == R.id.nav_perfil) {
             replaceFragment(new PerfilFragment());
         } else if (id == R.id.nav_vendas) {
-            replaceFragment(new MesasFragment());
+            replaceFragment(new MesaFragment());
             getSupportActionBar().setTitle("Mesas");
 
 

@@ -64,7 +64,7 @@ public class AdapterMesa extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.i("[IFMG]", "view: " + lin.get(position).getMesa());
         View view = LayoutInflater.from(context).inflate(R.layout.mesa_adapter, parent, false);
-        TextView mesa = (TextView) view.findViewById(R.id.tvMesa);
+        TextView mesa = (TextView) view.findViewById(R.id.tvMesaNum);
         CardView back = (CardView) view.findViewById(R.id.back);
         mesa.setText(lin.get(position).getMesa() + "");
         Log.i("[IFMG]", "status : " + lin.get(position).getStatus());

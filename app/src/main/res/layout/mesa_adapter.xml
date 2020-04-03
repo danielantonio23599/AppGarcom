@@ -4,26 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/back"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
 
         card_view:cardBackgroundColor="@color/color_green"
         card_view:cardCornerRadius="5dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp">
+        tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/tvMesa"
+            android:id="@+id/tvMesaNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:fontFamily="@font/buenard"
-            android:gravity="center_horizontal|center_vertical"
+            android:fontFamily="monospace"
+            android:gravity="center"
             android:text="01"
             android:textSize="24sp" />
     </androidx.cardview.widget.CardView>

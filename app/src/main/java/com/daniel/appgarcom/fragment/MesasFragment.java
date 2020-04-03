@@ -41,7 +41,7 @@ public class MesasFragment extends Fragment implements AdapterView.OnItemClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmente_mesas, container, false);
-        listView = (GridView) view.findViewById(R.id.lvMesas);
+        //listView = (GridView) view.findViewById(R.id.lvMesas);
         buscarMesas();
         return view;
     }

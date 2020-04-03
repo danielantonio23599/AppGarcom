@@ -40,7 +40,6 @@ import retrofit2.Response;
 public class ProdutoActivity extends AppCompatActivity {
     private int venda;
     private RecyclerView recyclerView;
-    private ProgressDialog progressDialog;
     private AdapterProduto adapter;
     private ArrayList<Produto> produtos;
     private AlertDialog alerta;
