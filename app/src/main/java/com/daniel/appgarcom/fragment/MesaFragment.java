@@ -123,20 +123,22 @@ public class MesaFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     String auth = response.headers().get("auth");
-                    final int sucesso = Integer.parseInt(response.headers().get("sucesso"));
+                    final String sucesso = response.headers().get("sucesso");
                     if (auth.equals("1")) {
                         escondeDialog();
 
-                        if (sucesso == 0) {
+                        if (sucesso.equals("0")) {
                             Log.i("[IFMG]", "sucesso : " + sucesso);
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
 
-                                     Toast.makeText(getContext(), "Mesa já Aberta", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Mesa já Aberta", Toast.LENGTH_LONG).show();
                                 }
                             });
 
+                        } else if (sucesso.equals("-1")) {
+                            Toast.makeText(getContext(), "Caixa está fechado", Toast.LENGTH_LONG).show();
                         } else {
                             getUserListFromRestApi();
                         }
@@ -170,11 +172,18 @@ public class MesaFragment extends Fragment {
             public void onResponse(Call<ArrayList<Mesa>> call, Response<ArrayList<Mesa>> response) {
                 if (response.isSuccessful()) {
                     String auth = response.headers().get("auth");
+                    String sucesso = response.headers().get("sucesso");
                     if (auth.equals("1")) {
-                        Log.i("[IFMG]", "login correto");
-                        mesa = new ArrayList<>(response.body());
-                        escondeDialog();
-                        onItemClick(mesa);
+                        if (sucesso.equals("0")) {
+                            escondeDialog();
+                            Toast.makeText(getActivity(), "Caixa está fechado", Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.i("[IFMG]", "login correto");
+                            mesa = new ArrayList<>(response.body());
+                            escondeDialog();
+                            onItemClick(mesa);
+                        }
+
                     } else {
                         Log.i("[IFMG]", "login incorreto");
                         escondeDialog();
@@ -234,6 +243,7 @@ public class MesaFragment extends Fragment {
             alerta.dismiss();
         }
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();

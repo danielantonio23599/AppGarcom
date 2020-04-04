@@ -165,6 +165,7 @@ public class PerfilFragment extends Fragment {
 
         RestauranteAPI i = SyncDefaut.RETROFIT_RESTAURANTE(getContext()).create(RestauranteAPI.class);
         SharedPreferences s = PreferencesSettings.getAllPreferences(getContext());
+        Log.i("IFMG", "Senha: " + u.getSenha());
         final Call<Void> call = i.atualizarFuncionario(new Gson().toJson(u), s.getEmail(), u.getSenha());
 
         Log.i("USUARIO", "U: " + u.toString());

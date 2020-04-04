@@ -3,7 +3,9 @@ package com.daniel.appgarcom.adapter.holder;
 public class Pedido {
     private int codigo;
     private int mesa;
+    private int venda;
     private String produto;
+    private int codigoProduto;
     private float quantidade;
     //hora que foi feito o pedido
     private String hora_pedido;
@@ -15,6 +17,14 @@ public class Pedido {
     private String status;
     private String observacao;
     private String hora_final;
+
+    public int getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    public void setCodigoProduto(int codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
 
     public int getMesa() {
         return mesa;
