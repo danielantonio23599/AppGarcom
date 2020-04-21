@@ -31,10 +31,6 @@
                 android:icon="@drawable/menu"
                 android:title="@string/menu_cardapio" />
             <item
-                android:id="@+id/nav_produtos"
-                android:icon="@drawable/menu"
-                android:title="@string/menu_produtos" />
-            <item
                 android:id="@+id/nav_promocao"
                 android:icon="@drawable/tag"
                 android:title="@string/menu_promocao" />

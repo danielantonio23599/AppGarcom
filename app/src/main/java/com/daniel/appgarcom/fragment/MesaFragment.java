@@ -1,7 +1,6 @@
 package com.daniel.appgarcom.fragment;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,28 +22,21 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.daniel.appgarcom.PrincipalActivity;
 import com.daniel.appgarcom.ProdutoActivity;
 import com.daniel.appgarcom.R;
-import com.daniel.appgarcom.adapter.AdapterMesa;
 import com.daniel.appgarcom.adapter.AdapterMesaR;
 
-import com.daniel.appgarcom.adapter.MesaItemClickListener;
+import com.daniel.appgarcom.adapter.interfaces.MesaItemClickListener;
 
 import com.daniel.appgarcom.adapter.holder.Mesa;
+import com.daniel.appgarcom.modelo.beans.Empresa;
 import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
-import com.daniel.appgarcom.modelo.beans.Servidor;
 import com.daniel.appgarcom.modelo.beans.SharedPreferences;
-import com.daniel.appgarcom.modelo.persistencia.BdServidor;
+import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
 import com.daniel.appgarcom.util.TecladoUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -164,9 +155,11 @@ public class MesaFragment extends Fragment {
 
     private void getUserListFromRestApi() {
         mostraDialog();
-        SharedPreferences sh = PreferencesSettings.getAllPreferences(getContext());
+        BdEmpresa bd = new BdEmpresa(getActivity());
+        Empresa sh = bd.listar();
+        bd.close();
         RestauranteAPI api = SyncDefaut.RETROFIT_RESTAURANTE(getContext()).create(RestauranteAPI.class);
-        final Call<ArrayList<Mesa>> call = api.getMesasAbertas(sh.getEmail(), sh.getSenha());
+        final Call<ArrayList<Mesa>> call = api.getMesasAbertas(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Mesa>>() {
             @Override
             public void onResponse(Call<ArrayList<Mesa>> call, Response<ArrayList<Mesa>> response) {
@@ -213,7 +206,7 @@ public class MesaFragment extends Fragment {
             @Override
             public void onItemClick(Mesa user, int position) {
                 Intent intent = new Intent(getActivity(), ProdutoActivity.class);
-                intent.putExtra("venda", user.getVenda());
+                intent.putExtra("venda", user.getMesa());
                 startActivity(intent);
                 // Toast.makeText(getContext(), "" + user.getStatus(), Toast.LENGTH_SHORT).show();
 

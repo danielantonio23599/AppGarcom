@@ -18,6 +18,8 @@ public class Produto {
     @SerializedName("tipo")
     private String tipo;
 
+
+
     public int getCodigo() {
         return codigo;
     }

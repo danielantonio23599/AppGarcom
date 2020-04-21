@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,10 +21,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.appgarcom.R;
+import com.daniel.appgarcom.adapter.AdapterCardapio;
 import com.daniel.appgarcom.adapter.AdapterProduto;
-import com.daniel.appgarcom.adapter.interfaces.CustomItemClickListener;
 import com.daniel.appgarcom.adapter.holder.DialogHelper;
 import com.daniel.appgarcom.adapter.holder.PedidoBEAN;
+import com.daniel.appgarcom.adapter.interfaces.CardapioItemClickListener;
+import com.daniel.appgarcom.adapter.interfaces.CustomItemClickListener;
 import com.daniel.appgarcom.modelo.beans.Empresa;
 import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
 import com.daniel.appgarcom.modelo.beans.Produto;
@@ -39,10 +42,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProdutoFragment extends Fragment {
-    private int venda;
+public class CardapioFragment extends Fragment {
     private RecyclerView recyclerView;
-    private AdapterProduto adapter;
+    private AdapterCardapio adapter;
     private ArrayList<Produto> produtos;
     private AlertDialog alerta;
     private VendaFragment vendaFragment = null;
@@ -51,16 +53,13 @@ public class ProdutoFragment extends Fragment {
         this.vendaFragment = vendaFragment;
     }
 
-    public void setVenda(int venda) {
-        this.venda = venda;
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_produto, container, false);
+        View view = inflater.inflate(R.layout.fragment_cardapio, container, false);
         setHasOptionsMenu(true);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvProduto);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvCadapio);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -111,30 +110,13 @@ public class ProdutoFragment extends Fragment {
     }
 
     private void onItemClick(final ArrayList<Produto> produtos) {
-        adapter = new AdapterProduto(getActivity(), produtos, new CustomItemClickListener() {
+        adapter = new AdapterCardapio(getActivity(), produtos, new CardapioItemClickListener() {
             @Override
             public void onItemClick(Produto produto, int position) {
-                if (vendaFragment == null) {
-                    vendaFragment = new VendaFragment();
-                }
-                PedidoBEAN i = getDadosPedido(produto);
-                vendaFragment.setVenda(venda);
-                vendaFragment.addItem(i);
-                replaceFragment(vendaFragment);
-                //   Toast.makeText(getActivity(), "" + user.getNome(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + produto.getNome(), Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);
-    }
-
-    private PedidoBEAN getDadosPedido(Produto produto) {
-        PedidoBEAN p = new PedidoBEAN();
-        p.setTime(Time.getTime());
-        p.setProNome(produto.getNome());
-        p.setProduto(produto.getCodigo());
-        p.setValor(produto.getPreco());
-        p.setVenda(venda);
-        return p;
     }
 
 
@@ -144,7 +126,7 @@ public class ProdutoFragment extends Fragment {
         //inflamos o layout alerta.xml na view
         View view = li.inflate(R.layout.alert_progress, null);
         TextView tvDesc = (TextView) view.findViewById(R.id.tvDesc);    //definimos para o botão do layout um clickListener
-        tvDesc.setText("Buscando pedios Pendentes...");
+        tvDesc.setText("Buscando produtos...");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Aguarde...");
         builder.setView(view);

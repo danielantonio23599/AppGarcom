@@ -63,15 +63,14 @@ public class AdapterPedidos extends BaseAdapter {
         Log.i("[IFMG]", "view: " + lin.get(position).getProduto());
         View view = LayoutInflater.from(context).inflate(R.layout.pedidos_adapter, parent, false);
         TextView produto = (TextView) view.findViewById(R.id.tvProduto);
-        TextView tempo_preparo = (TextView) view.findViewById(R.id.tvTempoPreparo);
+        TextView status = (TextView) view.findViewById(R.id.tvStatus);
         TextView observacao = (TextView) view.findViewById(R.id.tvObservacao);
         TextView mesa = (TextView) view.findViewById(R.id.tvNunMesa);
         TextView quantidade = (TextView) view.findViewById(R.id.tvQuantidade);
         TextView tempoEspera = (TextView) view.findViewById(R.id.tvTempoEspera);
         FrameLayout layout = (FrameLayout) view.findViewById(R.id.layFundo);
-
         produto.setText(lin.get(position).getProduto() + "");
-        tempo_preparo.setText(lin.get(position).getTempo_preparo());
+        status.setText(lin.get(position).getStatus());
         observacao.setText(lin.get(position).getObservacao());
         quantidade.setText(lin.get(position).getQuantidade() + "");
         tempoEspera.setText(Time.subtrairHoras(lin.get(position).getHora_pedido()));

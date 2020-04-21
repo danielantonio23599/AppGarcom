@@ -2,55 +2,34 @@ package com.daniel.appgarcom;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.daniel.appgarcom.adapter.AdapterProduto;
-import com.daniel.appgarcom.adapter.CustomItemClickListener;
-import com.daniel.appgarcom.adapter.holder.DialogHelper;
 import com.daniel.appgarcom.modelo.beans.Empresa;
-import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
-import com.daniel.appgarcom.modelo.beans.Produto;
-import com.daniel.appgarcom.modelo.beans.SharedPreferences;
 import com.daniel.appgarcom.modelo.beans.Usuario;
 import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
+import com.daniel.appgarcom.util.Criptografia;
 import com.daniel.appgarcom.util.PermissionUtils;
 import com.daniel.appgarcom.util.UtilImageTransmit;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -160,7 +139,7 @@ public class CadastroActivity extends AppCompatActivity {
         u.setNome(nome.getText() + "");
         u.setTelefone(telefone.getText()+"");
         u.setEmail(email.getText()+"");
-        u.setSenha(pwd.getText()+"");
+        u.setSenha(Criptografia.criptografar(pwd.getText()+""));
         u.setCPF(cpf.getText()+"");
         u.setRG(rg.getText()+"");
         u.setLogradouro(logradouro.getText()+"");
@@ -178,6 +157,7 @@ public class CadastroActivity extends AppCompatActivity {
         RestauranteAPI i = SyncDefaut.RETROFIT_RESTAURANTE(getApplication()).create(RestauranteAPI.class);
         BdEmpresa bd = new BdEmpresa(getApplication());
         Empresa e = bd.listar();
+        bd.close();
         final Call<Void> call = i.insereFuncionario(new Gson().toJson(u),e.getEmpEmail(),e.getEmpSenha());
 
         Log.i("USUARIO", "U: " + u.toString());

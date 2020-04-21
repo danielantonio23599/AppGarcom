@@ -21,8 +21,10 @@ import com.daniel.appgarcom.ProdutoActivity;
 import com.daniel.appgarcom.R;
 import com.daniel.appgarcom.adapter.AdapterMesa;
 import com.daniel.appgarcom.adapter.holder.Mesa;
+import com.daniel.appgarcom.modelo.beans.Empresa;
 import com.daniel.appgarcom.modelo.beans.PreferencesSettings;
 import com.daniel.appgarcom.modelo.beans.SharedPreferences;
+import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
 
@@ -80,9 +82,11 @@ public class MesasFragment extends Fragment implements AdapterView.OnItemClickLi
 
     private void buscarMesas() {
         mostraDialog();
-        SharedPreferences sh = PreferencesSettings.getAllPreferences(getActivity().getBaseContext());
+        BdEmpresa bd = new BdEmpresa(getActivity());
+        Empresa sh = bd.listar();
+        bd.close();
         RestauranteAPI api = SyncDefaut.RETROFIT_RESTAURANTE(getContext()).create(RestauranteAPI.class);
-        final Call<ArrayList<Mesa>> call = api.getMesasAbertas(sh.getEmail(), sh.getSenha());
+        final Call<ArrayList<Mesa>> call = api.getMesasAbertas(sh.getEmpEmail(), sh.getEmpSenha());
         call.enqueue(new Callback<ArrayList<Mesa>>() {
             @Override
             public void onResponse(Call<ArrayList<Mesa>> call, Response<ArrayList<Mesa>> response) {

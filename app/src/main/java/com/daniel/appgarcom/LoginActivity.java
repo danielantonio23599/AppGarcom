@@ -19,6 +19,7 @@ import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
 import com.daniel.appgarcom.modelo.persistencia.BdServidor;
 import com.daniel.appgarcom.sync.RestauranteAPI;
 import com.daniel.appgarcom.sync.SyncDefaut;
+import com.daniel.appgarcom.util.Criptografia;
 import com.daniel.appgarcom.util.TecladoUtil;
 
 import retrofit2.Call;
@@ -84,22 +85,19 @@ public class LoginActivity extends AppCompatActivity {
     public void fazLogin(String nomeUsuario, String senha) {
         Log.i("[IFMG]", "faz login");
         mostraDialog();
-
         RestauranteAPI api = SyncDefaut.RETROFIT_RESTAURANTE(getApplicationContext()).create(RestauranteAPI.class);
-
-        final Call<Empresa> call = api.fazLoginEmpresa(nomeUsuario, senha);
-
+        final Call<Empresa> call = api.fazLoginEmpresa(nomeUsuario, Criptografia.criptografar(senha));
         call.enqueue(new Callback<Empresa>() {
             @Override
             public void onResponse(Call<Empresa> call, Response<Empresa> response) {
                 if (response.code() == 200) {
                     String auth = response.headers().get("auth");
-
                     if (auth.equals("1")) {
                         Empresa u = response.body();
                         BdEmpresa bd = new BdEmpresa(getApplication());
                         bd.deleteAll();
                         bd.insert(u);
+                        bd.close();
                         try {
                             Thread.sleep(300);
                         } catch (InterruptedException e) {

@@ -1,7 +1,6 @@
 package com.daniel.appgarcom.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daniel.appgarcom.R;
 import com.daniel.appgarcom.adapter.holder.Mesa;
+import com.daniel.appgarcom.adapter.interfaces.MesaItemClickListener;
 
 import java.util.ArrayList;
 

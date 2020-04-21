@@ -33,6 +33,8 @@
 
                 <TextView
                     android:id="@+id/tvNome"
+                    android:maxLength="14"
+                    android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:fontFamily="@font/buenard"

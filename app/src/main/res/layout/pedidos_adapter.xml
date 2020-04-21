@@ -91,7 +91,7 @@
 
                 <TextView
                     android:id="@+id/tvObservacao"
-                    android:layout_width="144dp"
+                    android:layout_width="118dp"
                     android:layout_height="match_parent"
                     android:fontFamily="serif"
                     android:paddingLeft="5dp"
@@ -102,14 +102,15 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tvTempoPreparo"
-                    android:layout_width="30dp"
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="serif"
                     android:paddingTop="7dp"
                     android:text="0:20"
                     android:textAlignment="center"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
 
         </LinearLayout>

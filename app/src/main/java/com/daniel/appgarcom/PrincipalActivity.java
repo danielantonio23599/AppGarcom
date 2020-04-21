@@ -13,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.daniel.appgarcom.fragment.CardapioFragment;
+import com.daniel.appgarcom.fragment.ExcluirFragment;
 import com.daniel.appgarcom.fragment.MesaFragment;
 import com.daniel.appgarcom.fragment.MesasFragment;
+import com.daniel.appgarcom.fragment.PedidoFragment;
 import com.daniel.appgarcom.fragment.PerfilFragment;
 import com.daniel.appgarcom.modelo.beans.Usuario;
 import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
@@ -137,19 +140,14 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
 
         } else if (id == R.id.nav_pedido) {
-            // replaceFragment(new MesasFragment());
-
+            replaceFragment(new PedidoFragment());
 
         } else if (id == R.id.nav_cancelar) {
-            // replaceFragment(new MesasFragment());
+            replaceFragment(new ExcluirFragment());
 
 
         } else if (id == R.id.nav_cardapio) {
-            // replaceFragment(new MesasFragment());
-
-
-        } else if (id == R.id.nav_produtos) {
-            // replaceFragment(new MesasFragment());
+             replaceFragment(new CardapioFragment());
 
 
         } else if (id == R.id.nav_promocao) {
