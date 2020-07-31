@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/buenard"
+        android:paddingLeft="8dp"
+        android:text="Qual a sua data de nascimento?"
+        android:textColor="@color/colorText"
+        android:textSize="24sp" />
+
+    <FrameLayout
+        android:paddingHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="25dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_data"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/buenard"
+            android:hint="Data de Nascimento"
+            app:boxStrokeColor="@color/colorAccent"
+            app:boxStrokeWidthFocused="1dp"
+            app:counterTextColor="@color/colorAccent"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@android:drawable/ic_dialog_info"
+            app:errorTextColor="@color/color_red"
+            app:hintTextColor="@color/colorAccent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/buenard"
+                android:maxLength="10"
+                android:hint=""
+                android:inputType="number"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </FrameLayout>
+</LinearLayout>

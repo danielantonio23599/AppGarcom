@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/buenard"
+        android:paddingLeft="8dp"
+        android:text="Qual o seu CEP?"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            tools:visibility="visible">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/lay_cep"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:gravity="left"
+                    android:hint="CEP"
+                    app:boxStrokeColor="@color/colorAccent"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:counterTextColor="@color/colorAccent"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/alerta"
+                    app:errorTextColor="@color/color_red"
+                    app:helperText="O CEP digitado sera usado como busca para pesquisa de endereço"
+                    app:hintTextColor="@color/colorAccent">
+
+
+                    <EditText
+                        android:id="@+id/input_cep"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/buenard"
+                        android:inputType="number"
+                        android:maxLength="9"
+                        android:paddingLeft="9dp"
+                        android:paddingRight="25dp"
+                        android:text=""
+                        android:textSize="20sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backgroud_botao"
+        android:text="BUSCAR CEP"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="18sp"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/lyEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/buenard"
+                        android:hint="Logradouro"
+                        app:boxStrokeColor="@color/colorAccent"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:counterTextColor="@color/colorAccent"
+                        app:errorEnabled="true"
+                        app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                        app:errorTextColor="@color/color_red"
+                        app:hintTextColor="@color/colorAccent">
+
+                        <EditText
+                            android:id="@+id/input_logradouro"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/buenard"
+                            android:inputType="textPostalAddress"
+                            android:paddingLeft="9dp"
+                            android:paddingRight="25dp"
+                            android:text=""
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_weight="0.80"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/buenard"
+                android:hint="Bairro"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+
+                <EditText
+                    android:id="@+id/input_bairro"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="9dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/buenard"
+                android:hint="Numero"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+
+                <EditText
+                    android:id="@+id/input_numero"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/buenard"
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="9dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/buenard"
+                android:hint="Cidade"
+                android:layout_weight=".80"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+
+                <EditText
+                    android:id="@+id/input_cidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="9dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/buenard"
+                android:hint="UF"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+
+                <EditText
+                    android:id="@+id/input_uf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/buenard"
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/buenard"
+                android:hint="Complemento"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+
+                <EditText
+                    android:id="@+id/input_complemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/buenard"
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="9dp"
+                    android:paddingRight="25dp"
+                    android:text=""
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

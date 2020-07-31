@@ -177,6 +177,8 @@ public class VendaFragment extends Fragment implements AdapterView.OnItemClickLi
                         } else {
                             Log.i("[IFMG]", "Algo errado");
                             escondeDialog();
+                            Toast.makeText(getActivity(), sucesso, Toast.LENGTH_LONG).show();
+                            getActivity().finish();
                         }
 
                     } else {

@@ -52,7 +52,7 @@ public interface RestauranteAPI {
 
     @FormUrlEncoded
     @POST("restaurante_server/AdicionarFuncionario")
-    Call<Void> insereFuncionario(@Field("funcionario") String funcionario, @Field("empresa") String empresa, @Field("senha") String senha);
+    Call<Void> insereFuncionario(@Field("funcionario") String funcionario, @Field("nomeUsuario") String empresa, @Field("senha") String senha);
 
     @FormUrlEncoded
     @POST("restaurante_server/EditarFuncionario")

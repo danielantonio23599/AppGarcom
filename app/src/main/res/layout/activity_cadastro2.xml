@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_grey"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".Cadastro2Activity">
+
+    <!--  <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_foto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <ImageButton
+        android:id="@+id/imBack"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_gravity="top"
+        android:background="@drawable/backgroud_botao_back"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/back" />
+
+    <fragment
+        android:id="@+id/cadastro_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/backgroud_botao"
+        android:text="@string/next"
+        android:textColor="@color/material_on_surface_emphasis_high_type" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

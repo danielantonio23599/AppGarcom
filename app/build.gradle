@@ -60,4 +60,6 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     //LIBRARY PARA IMAGEM CIRCULAR
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //sms
+    implementation 'com.google.android.gms:play-services-auth-api-phone:16.0.0'
 }

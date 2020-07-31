@@ -10,4 +10,9 @@
     <color name="color_grey">#F8F8F8</color>
     <color name="endColor">#74e7e9</color>
     <color name="startColor">#f4fafa</color>
+    <color name="colorText">#434947</color>
+
+    <color name="color_grey_f">#48B5B4B4</color>
+    <color name="color_grey_start">#315471</color>
+    <color name="color_azul">#395068</color>
 </resources>

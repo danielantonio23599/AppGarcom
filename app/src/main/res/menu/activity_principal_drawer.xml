@@ -36,5 +36,16 @@
                 android:title="@string/menu_promocao" />
         </menu>
     </item>
+    <item android:title="Login">
+        <menu>
+            <item
+                android:id="@+id/nav_sair_usuario"
+                android:title="Sair Usuario" />
+            <item
+                android:id="@+id/nav_sair_empresa"
+                android:title="Sair Empresa" />
+        </menu>
+
+    </item>
 
 </menu>

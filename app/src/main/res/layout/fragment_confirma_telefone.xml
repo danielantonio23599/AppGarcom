@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/buenard"
+            android:paddingLeft="8dp"
+            android:text="Digite o código de 5 dígitos que enviamos via sms para "
+            android:textColor="@color/colorText"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:orientation="horizontal"
+            android:paddingTop="25dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:fontFamily="@font/buenard"
+                android:paddingLeft="15dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:fontFamily="@font/buenard"
+                android:paddingLeft="15dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:fontFamily="@font/buenard"
+                android:paddingLeft="15dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".20"
+                android:fontFamily="@font/buenard"
+                android:paddingLeft="15dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight=".20"
+                android:fontFamily="@font/buenard"
+                android:paddingLeft="15dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterTextColor="@color/colorAccent"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@android:drawable/ic_dialog_info"
+                app:errorTextColor="@color/color_red"
+                app:hintTextColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete|textEmailAddress"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTempo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/buenard"
+        android:paddingLeft="10dp"
+        android:text="Para reenviar o codigo, espere "
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -84,7 +84,7 @@ public class LoginGarcomActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tvSign_up.setPaintFlags(tvSign_up.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 tvSign_up.setTextColor(Color.BLUE);
-                mudaActivity(CadastroActivity.class);
+                mudaActivity(Cadastro2Activity.class);
 
             }
         });

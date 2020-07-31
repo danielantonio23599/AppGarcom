@@ -20,6 +20,7 @@ import com.daniel.appgarcom.fragment.MesasFragment;
 import com.daniel.appgarcom.fragment.PedidoFragment;
 import com.daniel.appgarcom.fragment.PerfilFragment;
 import com.daniel.appgarcom.modelo.beans.Usuario;
+import com.daniel.appgarcom.modelo.persistencia.BdEmpresa;
 import com.daniel.appgarcom.modelo.persistencia.BdUsuario;
 import com.daniel.appgarcom.util.UtilImageTransmit;
 import com.google.android.material.navigation.NavigationView;
@@ -59,7 +60,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new PerfilFragment());
+                mudaActivity(PerfilActivity.class);
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
@@ -133,7 +134,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         int id = item.getItemId();
 
         if (id == R.id.nav_perfil) {
-            replaceFragment(new PerfilFragment());
+            mudaActivity(PerfilActivity.class);
         } else if (id == R.id.nav_vendas) {
             replaceFragment(new MesaFragment());
             getSupportActionBar().setTitle("Mesas");
@@ -147,13 +148,26 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
 
         } else if (id == R.id.nav_cardapio) {
-             replaceFragment(new CardapioFragment());
+            replaceFragment(new CardapioFragment());
 
 
         } else if (id == R.id.nav_promocao) {
             // replaceFragment(new MesasFragment());
 
 
+        } else if (id == R.id.nav_sair_usuario) {
+            BdUsuario bd = new BdUsuario(getApplicationContext());
+            bd.deleteAll();
+            bd.close();
+            mudaActivity(LoginGarcomActivity.class);
+        } else if (id == R.id.nav_sair_empresa) {
+            BdUsuario bd = new BdUsuario(getApplicationContext());
+            bd.deleteAll();
+            bd.close();
+            BdEmpresa bd2 = new BdEmpresa(getApplicationContext());
+            bd2.deleteAll();
+            bd2.close();
+            mudaActivity(SplashActivity.class);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -161,7 +175,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     }
 
     public void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+       // getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment, "IFMG").addToBackStack(null).commit();
     }
 }
